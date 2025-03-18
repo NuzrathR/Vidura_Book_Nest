@@ -1,0 +1,574 @@
+body {
+    font-size: large;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    background-image: url("./Assets/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: rgba(204, 195, 195, 0.3);
+    background-blend-mode: overlay;
+}
+
+.content-container {
+    background-color: #E5DAD8;
+    border-radius: 15px;
+    height: 450px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 58px;
+    padding: 20px;
+    margin: 90px 50px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.detils-container {
+    background-color: #D09594;
+    padding-bottom: 30px;
+    border-radius: 10px;
+    height: 80%;
+    width: 80%;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-around; 
+    align-items: center;
+    margin: 20px 0;
+}
+
+.details-btn {
+    height: 12%;
+    width: 70%;
+    margin: 2%;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.view-details{
+    background-color: #E5DAD8;
+    border-radius: 15px;
+    height: 500px;
+    width: 100%;
+    padding: 20px;
+    margin: 33px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#content-wrap {
+    width: 100%;
+}
+
+#user-profile-container {
+    background-color: #E5C2BB;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 25px;
+    margin-top: 15px;
+    margin-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: absolute;
+    right: 10px;
+    z-index: 1;
+}
+
+#view-profile-option {
+    display: none;
+    width: fit-content;
+    height: fit-content; 
+    margin-right: 10px; 
+    line-height: 0.5em;
+    padding-bottom: 8px;
+}
+
+#user-profile-icon {
+    background-color: #E5C2BB;
+    border: 2px solid #E5C2BB;
+    padding: 5px;
+}
+
+#more-options {
+    display: none;
+    flex-direction: column;
+    background-color: #E5C2BB;
+    width: 175px;
+    position: absolute;
+    right: 22px;
+    margin-top: 60px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 15px;
+}
+
+.more-options-links {
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+}
+
+.header {
+    width: 100%;
+}
+
+nav {
+    z-index: 1;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: fit-content;
+    background-color:#E5DAD8;
+}
+
+.nav-element-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 30px;
+}
+
+.nav-element-container i {
+    font-size: x-large;
+}
+
+.header-links {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    font-size: larger;
+    color: rgb(0, 0, 0);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn {
+    background-color: #D09594;
+    border: 1px solid #D09594;
+    border-radius: 10px;
+    padding: 10px;
+    width: 130px;
+    font-weight: bold;
+    font-size: large;
+    color: black;
+    text-decoration: none;
+}
+
+.view-results{
+    background-color: #ebd0cc;
+    border-radius: 15px;
+    height: max-content;
+    width: max-content;
+    margin: 70px 50px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.search-bar {
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+input[type="text"] {
+    width: 60%;
+    height: 35px;
+    padding-left: 10px;
+    border: 2px solid #646464;
+    border-radius: 15px;
+    box-sizing: border-box;
+    margin-right: 15px;
+}
+
+#searchBtn {
+    width: 100px;
+    height: 35px;
+    background-color: #D09594;
+    padding: 0 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+#searchBtn:hover {
+    background-color: #cf6f6e;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    border: 1px solid #080808;
+    padding: 12px;
+    text-align: center;
+}
+
+table th {
+    background-color: #D09594;
+    color: rgb(7, 7, 7);
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table td {
+    font-size: medium;
+    color: #333;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.521);
+    z-index: 99; 
+}
+
+.update-book-details {
+    display: none;
+    position: absolute;
+    margin-top: 390px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #e78685;
+    padding: 5px;
+    box-shadow: 0px 0px 10px gray;
+    border: 2px solid black;
+    border-radius: 5px;
+    z-index: 999; 
+}
+
+.update-member-details {
+    display: none;
+    position: absolute;
+    margin-top: 150px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #e78685;
+    padding: 5px;
+    box-shadow: 0px 0px 10px gray;
+    border: 2px solid black;
+    border-radius: 5px;
+    z-index: 999; 
+}
+
+.update-members {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-members label {
+    font-weight: bold;
+    text-align: left;
+}
+
+.update-members input {
+    width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid black;
+    cursor: pointer;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+button[type="submit"] {
+    background-color: #22c20d;
+}
+#closeModal {
+    background-color: #dc3545;
+}
+
+.details-container {
+    width: 400px;
+    height: max-content;
+    background-color: #cf6f6e;
+    padding: 20px;
+    text-align: center;
+    margin: 33px;
+}
+
+table button {
+    width: 75px;
+    padding: 5px 10px;
+    font-size: medium;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    color: white;
+    border: 1px solid;
+    margin: 0px 10px;
+}
+
+/* Update Button */
+.update-btn {
+    background-color: #008080;
+    border-color: navy;
+}
+.update-btn:hover {
+    background-color: blue;
+}
+
+/* Delete Button */
+.delete-btn {
+    background-color: red;
+    border-color: rgb(128, 0, 0);
+}
+.delete-btn:hover {
+    background-color: maroon;
+}
+
+/* Return Button */
+.return-book-btn {
+    background-color: green;
+    border-color: darkgreen;
+}
+.return-book-btn:hover {
+    background-color: limegreen;
+}
+
+/* Lost Button */
+.lost-book-btn {
+    background-color: orange;
+    border-color: darkorange;
+}
+.lost-book-btn:hover {
+    background-color: gold;
+}
+
+/* Replace Button */
+.replace-btn {
+    width: 90px;
+    background-color: rgb(3, 205, 255);
+    border-color: rgb(2, 77, 100);
+}
+.replace-btn:hover {
+    background-color: rgb(106, 181, 204);
+}
+
+/* Pay Button */
+.pay-btn {
+    width: 90px;
+    background-color: rgb(255, 0, 200);
+    border-color: rgb(122, 4, 97);
+}
+.pay-btn:hover {
+    background-color: rgb(212, 84, 122);
+}
+
+.no-results {
+    color: red;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #e78685;
+    padding: 5px;
+    box-shadow: 0px 0px 10px gray;
+    border-radius: 5px;
+    z-index: 999;
+}
+
+.modal-content {
+    text-align: center;
+    margin: 5px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 3px;
+}
+
+.modal button {
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #40dbba;
+}
+
+.approved-btn {
+    width: 90px;
+    background-color: rgb(7, 126, 90);
+    border: 1px solid rgb(0, 100, 78);
+}
+
+.approved-btn:hover {
+    background-color: rgb(32, 223, 165);
+}
+
+.rejected-btn {
+    width: 90px;
+    background-color: rgb(211, 5, 39);
+    border: 1px solid rgb(153, 3, 28);
+}
+
+.rejected-btn:hover {
+    background-color: rgb(230, 28, 61);
+}
+
+.back-arrow {
+    padding: 4px;
+    background-color:#D09594; 
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    position: absolute;
+    left: 25px;
+}
+
+.back-arrow:hover {
+    background-color: #0056b3;
+}
+
+.arrow {
+    font-size: 15px; 
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: small;
+        flex-direction: column;
+    }
+
+    .content-container {
+        display: flex;
+        width: 80%;
+        height: auto;
+        margin: 200px 20px;
+        position: absolute;
+    }
+    .content-container img {
+        height: 30px;
+    }
+
+    .details-container {
+        width: 100%;
+        padding: 10px;
+        font-size: small;
+    }
+
+    .view-details {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+
+    .header {
+        width: 100%;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .nav-element-container {
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    .view-results {
+        width: 90%;
+    }
+
+    .search-bar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input[type="text"] {
+        width: 80%;
+    }
+
+    #searchBtn {
+        width: 80%;
+    }
+
+    table, table th, table td {
+        width: auto;
+        font-size: x-small;
+        padding: 8px;
+    }
+
+    table button {
+        width: 60px;
+        font-size: small;
+    }
+
+    .update-book-details,
+    .update-member-details {
+        position: absolute;
+        width: 210px;
+        padding: 5px;
+    }
+
+    .update-book-details input,
+    .update-member-details input {
+        width: 200px;
+        font-size: small;
+        padding: 5px;
+    }
+
+    .update-book-details label,
+    .update-member-details label {
+        width: 150px;
+        font-size: 0.9rem;
+    }
+
+    form {
+        width: 190px;
+    }
+
+    form button {
+        width: 200px;
+    }
+}

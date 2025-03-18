@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidura College BookNest</title>
+    <link rel="stylesheet" href="viewRecordsStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    <div class="header">
+        <nav>
+            <a href="admin.php">
+                <img src="./Assets/logo.jpg" alt="logo" style="width: 200px; padding: 10px;">
+            </a>
+    
+            <ul style="display: flex; list-style: none;">
+                <li>
+                    <div class="nav-element-container">
+                        <a href="addBook.php" class="header-links">Add Book</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="nav-element-container">
+                        <a href="updateBook.php" class="header-links">Update Books</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="nav-element-container">
+                        <a href="bookDetails.html" class="header-links">Delete Books</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="nav-element-container">
+                        <a href="viewRecords.php" class="header-links">View Records</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="content-wrap">
+        <div>
+            <a href="javascript:history.back()" class="back-arrow">
+                <span class="arrow">&#8592;</span> Back
+            </a>
+        </div>
+        <!-------------------------------User Profile------------------------------->
+        <div id="user-profile-container" onmouseover="showViewProfile()" onmouseleave="hideViewProfile()">
+            <div id="view-profile-option">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <p id="user-name"></p>
+                    <a href="viewProfile.php" style="text-decoration: none;">View Profile</a>
+                </div>
+            </div>
+            <button type="button" id="user-profile-icon">
+                <i class="fa fa-user" aria-hidden="true" style="font-size: xx-large;" onclick="showMore()"></i>
+            </button>
+        </div>
+
+        <div id="more-options">
+            <a href="editprofile.php" class="more-options-links">Edit Profile</a>
+            <a href="help.html" class="more-options-links">Help and Support</a>
+            <a href="settings.html" class="more-options-links">Settings</a>
+            <br>
+            <br>
+            <button type="button" class="btn" style="margin-left: 13px;">
+                <i class="fa fa-external-link" aria-hidden="true" style="color: blue; text-align: center;"></i>
+                <a href="logout.php" style="color: blue; text-decoration: none;font-weight: normal;font-family: 'Times New Roman', Times, serif;">Log Out</a>
+            </button>
+        </div>
+    </div>
+    <div class="view-results">
+        <h1>Borrowed Books Details</h1>
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search Borrowed Book Details Here...">
+            <button id="searchBtn">Search</button>
+        </div>
+
+        <!-- Table to Display Results -->
+        <div id="resultsTable"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            displayBorrowedBooks(); // Display all borrowed books function initialize
+
+            $.ajax({
+                url: "adminCommon.php",
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    if (response.name) {
+                        $("#user-name").text(response.name);
+                    } else {
+                        $("#user-name").text("Guest");
+                    }
+                },
+                error: function () {
+                    $("#user-name").text("Error fetching name");
+                }
+            });
+
+            // Search Borrowed Books
+            $("#searchBtn").on("click", function () {
+                const query = $("#searchInput").val();
+                displayBorrowedBooks(query);
+            });
+
+            // Search Borrowed Books by pressing Enter key
+            $("#searchInput").on("keypress", function (e) {
+                if (e.key === "Enter") { 
+                    const query = $(this).val();
+                    displayBorrowedBooks(query);
+                    e.preventDefault(); 
+                }
+            });
+
+            // Function to display borrowed books
+            function displayBorrowedBooks(query = "") {
+                $.ajax({
+                    url: "borrowedBooksDetails.php",
+                    type: "POST",
+                    data: { action: "fetch", query: query },
+                    success: function (response) {
+                        $("#resultsTable").html(response);
+                    },
+                });
+            }
+
+            // When click Return Button, Change the status
+            $(document).on("click", ".return-book-btn", function () {
+                const borrowId = $(this).data("borrow-id");
+                const bookId = $(this).data("book-id");
+                
+                $.ajax({
+                    url: "borrowedBooksDetails.php",
+                    type: "POST",
+                    data: {
+                        action: "return_book",
+                        borrow_id: borrowId,
+                        book_id: bookId,
+                    },
+                    success: function (response) {
+                        const res = JSON.parse(response);
+                        alert(res.message);
+                        displayBorrowedBooks();
+                    },
+                    error: function () {
+                        alert("An error occurred while updating the status.");
+                    },
+                });
+            });
+
+            // Mark as Lost Book
+            $(document).on("click", ".lost-book-btn", function () {
+                const borrowId = $(this).data("borrow-id");
+                const bookId = $(this).data("book-id");
+                const userId = $(this).data("user-id"); 
+                
+                $.ajax({
+                    url: "borrowedBooksDetails.php",
+                    type: "POST",
+                    data: {
+                        action: "mark_as_lost",
+                        borrow_id: borrowId,
+                        book_id: bookId,
+                        user_id: userId,
+                    },
+    
+                    success: function (response) {
+                        const res = JSON.parse(response);
+                        alert(res.message);
+                        displayBorrowedBooks(); 
+                    },
+                    error: function () {alert("An error occurred while updating the status.");
+
+                    },
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>

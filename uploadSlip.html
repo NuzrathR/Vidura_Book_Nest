@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Payment Slip</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            justify-content: center;
+            font-size: large;
+        }
+        .content-container {
+            background-color: #E5DAD8;
+            border-radius: 15px;
+            height: 450px;
+            width: 600px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            margin: 50px;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+        }
+        p {
+            color: rgb(88, 38, 207);
+            line-height: 1.5em;
+        }
+
+        .back-arrow {
+            display: inline-block;
+            padding: 4px;
+            background-color:#D09594; /* Bootstrap primary color */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 15px;
+            transition: background-color 0.3s;
+            z-index: 100;
+            margin: 20px;
+            position: fixed;
+        }
+
+        .back-arrow:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+
+        .arrow {
+            font-size: 15px; /* Adjust size of the arrow */
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:history.back()" class="back-arrow">
+        <span class="arrow">&#8592;</span> Back
+    </a>
+
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <div class="content-container">
+            <h1 style="color: rgb(0, 0, 0);">Upload Payment Slip</h1>
+            <p id="paymentDetails"> </p>
+            <form action="uploadSlip.php" method="post" enctype="multipart/form-data">
+                <label for="paymentSlip">Choose a payment slip to upload:</label>
+                <input type="file" name="paymentSlip" id="paymentSlip" accept=".jpg, .jpeg, .png, .pdf" required>
+                <br><br><br>
+                <!-- Hidden input fields -->
+                <input type="hidden" name="plan" id="plan">
+                <input type="hidden" name="price" id="price">
+                <input id="upload-btn" class="btn" type="submit" name="Upload" value="Upload">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const plan = localStorage.getItem("plan");
+            const price = localStorage.getItem("price");
+
+            const planDetails = {
+                "One Year": "1 Year Plan \n LKR 250 per year \n Can add up to 2 books per month and read up to 2 weeks time",
+                "Two Years": "2 Year Plan \n LKR 650 every two years  \n Can add up to 4 books per month and read up to a month"
+            };
+
+            if (plan && price) {
+                let details = planDetails[plan];  // Retrieve correct plan details
+                document.getElementById('paymentDetails').innerHTML = details.replace(/\n/g, "<br>");
+                document.getElementById("plan").value = plan;
+                document.getElementById("price").value = price;
+            }
+        });
+    </script>
+</body>
+</html>
